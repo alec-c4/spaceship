@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
+import Layout from '@/layouts/Layout.astro';
 
 export const getStaticPaths = (async () => {
   const posts = await getCollection('posts');
@@ -14,15 +15,8 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{post.data.title}</title>
-    {post.data.description && <meta name="description" content={post.data.description} />}
-  </head>
-  <body class="bg-background text-foreground min-h-screen p-8">
+<Layout title={post.data.title} description={post.data.description}>
+  <div class="bg-background text-foreground min-h-screen p-8">
     <article class="max-w-3xl mx-auto">
       <header class="mb-8">
         <a href="/posts" class="text-primary hover:underline mb-4 inline-block">← Back to posts</a>
@@ -61,5 +55,5 @@ const { Content } = await post.render();
         <Content />
       </div>
     </article>
-  </body>
-</html>
+  </div>
+</Layout>

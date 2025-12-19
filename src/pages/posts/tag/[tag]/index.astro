@@ -1,0 +1,95 @@
+---
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import Layout from '@/layouts/Layout.astro';
+
+export const getStaticPaths = (async () => {
+  const posts = await getCollection('posts');
+
+  // Extract all unique tags
+  const allTags = Array.from(new Set(posts.flatMap((post) => post.data.tags || [])));
+
+  // Create a path for each tag
+  return allTags.map((tag) => {
+    const filteredPosts = posts
+      .filter((post) => !post.data.draft && post.data.tags?.includes(tag))
+      .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+    return {
+      params: { tag },
+      props: { tag, posts: filteredPosts },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+const { tag, posts } = Astro.props;
+const allPosts = await getCollection('posts');
+const totalCount = allPosts.filter((p) => !p.data.draft).length;
+---
+
+<Layout title={`Posts tagged with "${tag}"`} description={`Blog posts tagged with ${tag}`}>
+  <div class="bg-background text-foreground min-h-screen p-8">
+    <div class="max-w-4xl mx-auto">
+      <h1 class="text-4xl font-bold mb-2">
+        Posts tagged with <span class="text-primary">"{tag}"</span>
+      </h1>
+      <p class="text-muted-foreground mb-8">
+        {`Showing ${posts.length} ${posts.length === 1 ? 'post' : 'posts'}`}
+      </p>
+
+      <div class="mb-8">
+        <a href="/posts" class="text-primary hover:underline">
+          ← View all posts ({totalCount})
+        </a>
+      </div>
+
+      {
+        posts.length === 0 ? (
+          <p class="text-muted-foreground">No posts found with tag "{tag}".</p>
+        ) : (
+          <div class="space-y-6">
+            {posts.map((post) => (
+              <article class="border border-border rounded-lg p-6 hover:shadow-md transition-shadow">
+                <a href={`/posts/${post.slug}`} class="group">
+                  <h2 class="text-2xl font-semibold mb-2 group-hover:text-primary transition-colors">
+                    {post.data.title}
+                  </h2>
+                  {post.data.description && (
+                    <p class="text-muted-foreground mb-3">{post.data.description}</p>
+                  )}
+                  <div class="flex items-center gap-4 text-sm text-muted-foreground">
+                    <time datetime={post.data.pubDate.toISOString()}>
+                      {post.data.pubDate.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                      })}
+                    </time>
+                    {post.data.author && <span>by {post.data.author}</span>}
+                  </div>
+                  {post.data.tags && post.data.tags.length > 0 && (
+                    <div class="flex gap-2 mt-3">
+                      {post.data.tags.map((t) => (
+                        <a
+                          href={`/posts/tag/${t}`}
+                          class={`text-xs px-2 py-1 rounded hover:opacity-80 transition-opacity ${
+                            t === tag
+                              ? 'bg-primary text-primary-foreground'
+                              : 'bg-secondary text-secondary-foreground'
+                          }`}
+                          onclick={(e: Event) => e.stopPropagation()}
+                        >
+                          {t}
+                        </a>
+                      ))}
+                    </div>
+                  )}
+                </a>
+              </article>
+            ))}
+          </div>
+        )
+      }
+    </div>
+  </div>
+</Layout>
