@@ -34,7 +34,7 @@
       </h2>
       <time
         datetime={post.data.pubDate.toISOString()}
-        class="flex-shrink-0 text-xs font-medium text-muted-foreground/80 tabular-nums uppercase tracking-widest"
+        class="flex-shrink-0 text-xs font-medium text-muted-foreground tabular-nums uppercase tracking-widest"
       >
         {formatDate(post.data.pubDate)}
       </time>

@@ -26,7 +26,7 @@
   --color-secondary-foreground: #18181b;
 
   --color-muted: #f4f4f5;
-  --color-muted-foreground: #27272a; /* Zinc 800 for better contrast */
+  --color-muted-foreground: #18181b; /* Zinc 900 for absolute contrast compliance */
 
   --color-accent: #f4f4f5;
   --color-accent-foreground: #18181b;
