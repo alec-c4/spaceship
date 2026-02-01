@@ -5,32 +5,47 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.2] - 2026-02-01
+
+### Added
+
+- **Custom Post Slugs**:
+  - Full support for `slug` field in frontmatter (e.g., `/posts/my-title`).
+  - Automated fallback to date-slug format (`YYYY-MM-DD-filename`) if no slug is provided.
+  - Updated all systems (RSS, Search, OG-images) to respect custom identifiers.
+- **Expanded Global Language Support**:
+  - Added support for 40+ global languages (PL, BE, KK, TR, AR, HI, JA, etc.).
+  - Support for both `uk` and `ua` codes for Ukrainian language.
+
+### Fixed
+
+- **Home Page Appearance Flags**: Added missing language indicators for the "Talks & Appearances" section on the index page.
+
 ## [1.2.1] - 2026-02-01
 
 ### Added
 
-- **Multi-language Support**:
+- **Initial Multi-language Support**:
   - Added `lang` field to posts and appearances (defaults to `en`).
-  - Visual language indicators (emoji flags) for non-default languages.
-  - Dynamic `html lang` attribute and JSON-LD `inLanguage` metadata for SEO.
+  - Visual color flags for non-English content in lists and pages.
+  - Dynamic `html lang` and JSON-LD `inLanguage` metadata for SEO.
 - **Google Tag Manager (GTM) Support**:
-  - Automatically detects `GTM-XXXX` vs `G-XXXX` IDs.
-  - Implements full GTM container with `<noscript>` fallback.
-  - Offloaded via Partytown for maximum performance.
-- **Custom 404 Page**: Added a premium, animated 404 page for better user retention.
+  - Native support for both `GTM-XXXX` and `G-XXXX` IDs.
+  - Performance-optimized via Partytown (zero main-thread impact).
+  - Included `<noscript>` fallback for maximum compatibility.
+- **Premium 404 Page**: Custom, animated Error 404 page for better user retention.
 
 ### Changed
 
-- **Clean Architecture Reorganization**:
-  - Moved `public/` assets to `site/public/` (configurable via `publicDir`).
-  - Moved user assets to `site/assets/` with a new `@/site-assets` alias.
-  - Ensures core engine updates don't touch user content/media.
-- **Robots.txt**: Replaced static file with dynamic endpoint in `src/pages/robots.txt.ts`.
+- **Architecture Reorganization**:
+  - Assets moved from `public/` to `site/public/` for cleaner engine/content separation.
+  - User media moved to `site/assets/` with a new `@/site-assets` alias.
+- **SEO Optimization**: Replaced static `robots.txt` with a dynamic API endpoint.
 
 ### Fixed
 
-- **Giscus Theme Hydration**: Fixed internal Svelte lint error in Comments component.
-- **SEO Metadata**: Standardized H1 hierarchy across all pages.
+- **Giscus Theme Hydration**: Fixed internal script injection warning in Comments component.
+- **Content Hierarchy**: Standardized H1 usage across all templates for better search ranking.
 
 ## [1.2.0] - 2026-02-01
 
@@ -190,6 +205,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+[1.2.2]: https://github.com/alec-c4/spaceship/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/alec-c4/spaceship/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/alec-c4/spaceship/compare/v1.1.3...v1.2.0
 [1.1.0]: https://github.com/alec-c4/spaceship/compare/v1.0.1...v1.1.0

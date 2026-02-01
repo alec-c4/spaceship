@@ -2,7 +2,7 @@ import rss from '@astrojs/rss';
 import type { CollectionEntry } from 'astro:content';
 import { SITE } from '@/config';
 import type { APIContext } from 'astro';
-import { getPublishedPosts } from '@/lib/utils/posts';
+import { getPublishedPosts, getPostSlug } from '@/lib/utils/posts';
 
 export async function GET(context: APIContext) {
   const posts = await getPublishedPosts();
@@ -21,7 +21,7 @@ export async function GET(context: APIContext) {
       title: post.data.title,
       pubDate: post.data.pubDate,
       description: post.data.description,
-      link: `/posts/${post.id}/`,
+      link: `/posts/${getPostSlug(post)}/`,
       categories: post.data.tags,
     })),
     customData: `<language>en-us</language>`,

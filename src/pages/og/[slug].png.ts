@@ -4,12 +4,12 @@ import satori from 'satori';
 import { html } from 'satori-html';
 import { Resvg } from '@resvg/resvg-js';
 import { SITE } from '@/config';
-import { getPublishedPosts } from '@/lib/utils/posts';
+import { getPublishedPosts, getPostSlug } from '@/lib/utils/posts';
 
 export async function getStaticPaths() {
   const posts = await getPublishedPosts();
   return posts.map((post: CollectionEntry<'posts'>) => ({
-    params: { slug: post.id },
+    params: { slug: getPostSlug(post) },
     props: { post },
   }));
 }

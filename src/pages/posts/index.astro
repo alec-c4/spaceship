@@ -3,7 +3,7 @@ import Layout from '@/layouts/Layout.astro';
 import PostCard from '@/components/PostCard.svelte';
 import Breadcrumbs from '@/components/Breadcrumbs.svelte';
 import { getReadTime } from '@/lib/utils/readTime';
-import { getPublishedPosts } from '@/lib/utils/posts';
+import { getPublishedPosts, getPostSlug } from '@/lib/utils/posts';
 import { SITE } from '@/config';
 import { getBreadcrumbSchema } from '@/lib/schemas';
 
@@ -74,7 +74,11 @@ const sortedTags = Object.entries(tagCounts)
               </div>
               <div class="flex flex-col gap-3 sm:gap-4">
                 {groupedPosts[year].map((post) => (
-                  <PostCard {post} readTime={getReadTime(post.body || '')} />
+                  <PostCard
+                    {post}
+                    slug={getPostSlug(post)}
+                    readTime={getReadTime(post.body || '')}
+                  />
                 ))}
               </div>
             </section>

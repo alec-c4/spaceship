@@ -3,10 +3,11 @@ import Layout from '@/layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import PostCard from '@/components/PostCard.svelte';
 import { getReadTime } from '@/lib/utils/readTime';
-import { getPublishedPosts } from '@/lib/utils/posts';
+import { getPublishedPosts, getPostSlug } from '@/lib/utils/posts';
 import { SITE } from '@/config';
 import { Image } from 'astro:assets';
 import profilePhoto from '@/site-assets/profile_photo.png';
+import { getLangFlag } from '@/lib/utils/lang';
 
 const posts = (await getPublishedPosts()).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -88,7 +89,7 @@ const appearances = (await getCollection('appearances'))
           </div>
           <div class="grid gap-3 sm:gap-4">
             {featuredPosts.map((post) => (
-              <PostCard {post} readTime={getReadTime(post.body || '')} />
+              <PostCard {post} slug={getPostSlug(post)} readTime={getReadTime(post.body || '')} />
             ))}
           </div>
         </section>
@@ -109,7 +110,11 @@ const appearances = (await getCollection('appearances'))
         >
       </div>
       <div class="grid gap-3 sm:gap-4">
-        {latestPosts.map((post) => <PostCard {post} readTime={getReadTime(post.body || '')} />)}
+        {
+          latestPosts.map((post) => (
+            <PostCard {post} slug={getPostSlug(post)} readTime={getReadTime(post.body || '')} />
+          ))
+        }
       </div>
     </section>
 
@@ -264,9 +269,22 @@ const appearances = (await getCollection('appearances'))
                   {item.data.title}
                 </span>
               </div>
-              <span class="text-xs font-medium text-muted-foreground tabular-nums">
-                {item.data.date.getFullYear()}
-              </span>
+              <div class="flex items-center gap-4">
+                {item.data.lang && item.data.lang !== 'en' && (
+                  <span
+                    class="inline-flex items-center gap-1.5 px-1.5 py-0.5 rounded bg-secondary/50 text-[10px] font-bold uppercase tracking-tighter text-muted-foreground group-hover:text-foreground transition-colors cursor-help"
+                    title={`Language: ${item.data.lang}`}
+                  >
+                    <span class="text-sm leading-none group-hover:scale-110 transition-transform">
+                      {getLangFlag(item.data.lang)}
+                    </span>
+                    {item.data.lang}
+                  </span>
+                )}
+                <span class="text-xs font-medium text-muted-foreground tabular-nums">
+                  {item.data.date.getFullYear()}
+                </span>
+              </div>
             </a>
           ))
         }

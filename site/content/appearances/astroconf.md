@@ -5,5 +5,5 @@ date: 2024-05-15
 type: 'talk'
 link: 'https://youtube.com/example'
 description: 'A deep dive into how Astro 5 and Svelte 5 are changing the way we build the web.'
-language: 'English'
+lang: pl
 ---

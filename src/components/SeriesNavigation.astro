@@ -1,5 +1,5 @@
 ---
-import { getPublishedPosts } from '@/lib/utils/posts';
+import { getPublishedPosts, getPostSlug } from '@/lib/utils/posts';
 
 interface Props {
   seriesId: string;
@@ -52,7 +52,7 @@ if (seriesPosts.length <= 1) {
                 <span class="text-foreground font-medium">{post.data.title}</span>
               </div>
             ) : (
-              <a href={`/posts/${post.id}`} class="flex items-start gap-3 group">
+              <a href={`/posts/${getPostSlug(post)}`} class="flex items-start gap-3 group">
                 <span class="flex items-center justify-center w-6 h-6 mt-0.5 text-xs font-bold rounded-full bg-muted text-muted-foreground ring-1 ring-border group-hover:ring-primary/50 group-hover:text-primary transition-all flex-shrink-0">
                   {post.data.series?.order}
                 </span>

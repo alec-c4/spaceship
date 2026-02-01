@@ -18,7 +18,7 @@ export async function getPublishedPosts(): Promise<CollectionEntry<'posts'>[]> {
 
   // In production, filter out drafts and future posts
   const now = new Date();
-  return posts.filter((post) => {
+  return posts.filter((post: CollectionEntry<'posts'>) => {
     // Hide drafts
     if (post.data.draft) return false;
 
@@ -27,4 +27,18 @@ export async function getPublishedPosts(): Promise<CollectionEntry<'posts'>[]> {
 
     return true;
   });
+}
+/**
+ * Get the effective slug for a post.
+ * Priority:
+ * 1. frontmatter slug
+ * 2. Generated date-slug (YYYY-MM-DD-filename)
+ */
+export function getPostSlug(post: CollectionEntry<'posts'>): string {
+  if (post.data.slug) {
+    return post.data.slug;
+  }
+
+  const date = post.data.pubDate.toISOString().split('T')[0];
+  return `${date}-${post.id}`;
 }
