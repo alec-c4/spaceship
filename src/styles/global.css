@@ -201,6 +201,32 @@
   line-height: 1.75;
 }
 
+/* Inline code styling */
+.prose code {
+  @apply rounded px-1.5 py-0.5 font-medium font-mono border whitespace-pre-wrap;
+  font-size: 0.875em;
+  background-color: var(--color-secondary);
+  border-color: var(--color-border);
+  color: var(--color-foreground) !important;
+}
+
+.prose code::before,
+.prose code::after {
+  content: none !important;
+}
+
+/* Reset for code blocks */
+.prose pre code,
+.prose .astro-code code {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  font-size: inherit !important;
+  color: inherit !important;
+  font-weight: inherit !important;
+  white-space: inherit !important;
+}
+
 .prose pre,
 .prose .astro-code {
   margin-top: 2.5rem !important;
