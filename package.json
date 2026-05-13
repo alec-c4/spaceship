@@ -25,7 +25,7 @@
     "@shikijs/transformers": "^4.0.2",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.2",
-    "astro": "^6.1.8",
+    "astro": "^6.1.10",
     "mermaid": "^11.15.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-external-links": "^3.0.0",
