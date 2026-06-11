@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 import svelte from '@astrojs/svelte';
 import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
@@ -40,6 +41,33 @@ export default defineConfig({
   },
 
   markdown: {
+    processor: unified({
+      remarkPlugins: [remarkEmoji],
+      rehypePlugins: [
+        rehypeSlug,
+        [
+          rehypeAutolinkHeadings,
+          {
+            behavior: 'prepend',
+            properties: {
+              className: ['heading-link'],
+              ariaLabel: 'Link to section',
+            },
+            content: {
+              type: 'text',
+              value: '#',
+            },
+          },
+        ],
+        [
+          rehypeExternalLinks,
+          {
+            target: '_blank',
+            rel: ['noopener', 'noreferrer'],
+          },
+        ],
+      ],
+    }),
     shikiConfig: {
       themes: {
         light: 'min-light',
@@ -53,31 +81,6 @@ export default defineConfig({
         transformerNotationDiff(),
       ],
     },
-    remarkPlugins: [remarkEmoji],
-    rehypePlugins: [
-      rehypeSlug,
-      [
-        rehypeAutolinkHeadings,
-        {
-          behavior: 'prepend',
-          properties: {
-            className: ['heading-link'],
-            ariaLabel: 'Link to section',
-          },
-          content: {
-            type: 'text',
-            value: '#',
-          },
-        },
-      ],
-      [
-        rehypeExternalLinks,
-        {
-          target: '_blank',
-          rel: ['noopener', 'noreferrer'],
-        },
-      ],
-    ],
   },
 
   image: {
