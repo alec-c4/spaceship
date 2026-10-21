@@ -17,10 +17,19 @@ export async function getStaticPaths() {
 export const GET: APIRoute = async ({ props }) => {
   const { post } = props;
 
-  // Minimal buffer fetch for a font (Inter Bold)
-  const fontData = await fetch(
-    'https://cdn.jsdelivr.net/fontsource/fonts/inter@5.0.19/latin-700-normal.woff'
-  ).then((res) => res.arrayBuffer());
+  // Inter Bold subsets; each needs its own family name, or satori keeps only the first one
+  const subsets = ['latin', 'cyrillic'];
+  const fonts = await Promise.all(
+    subsets.map(async (subset) => ({
+      name: `Inter ${subset}`,
+      data: await fetch(
+        `https://cdn.jsdelivr.net/fontsource/fonts/inter@5.0.19/${subset}-700-normal.woff`
+      ).then((res) => res.arrayBuffer()),
+      weight: 700 as const,
+      style: 'normal' as const,
+    }))
+  );
+  const fontFamily = fonts.map((font) => `'${font.name}'`).join(', ');
 
   const markup = html`
     <div
@@ -34,7 +43,7 @@ export const GET: APIRoute = async ({ props }) => {
       justify-content: center;
       background-color: #0d1117;
       color: #fff;
-      font-family: 'Inter';
+      font-family: ${fontFamily};
       padding: 40px;
       text-align: center;
     "
@@ -78,14 +87,7 @@ export const GET: APIRoute = async ({ props }) => {
   const svg = await satori(markup, {
     width: 1200,
     height: 630,
-    fonts: [
-      {
-        name: 'Inter',
-        data: fontData,
-        weight: 700,
-        style: 'normal',
-      },
-    ],
+    fonts,
   });
 
   const resvg = new Resvg(svg, {
