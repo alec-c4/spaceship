@@ -27,6 +27,7 @@ export const GET: APIRoute = async ({ props }) => {
       style="
       height: 100%;
       width: 100%;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
       align-items: center;
