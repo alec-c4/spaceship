@@ -10,19 +10,17 @@ import { SITE } from '@/config';
     </div>
 
     <div class="flex flex-wrap justify-center gap-6 sm:gap-8">
-      {
-        Object.entries(SITE.social).map(([name, url]) => (
-          <a
-            href={url}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Visit our ${name} page`}
-            class="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-all no-underline"
-          >
-            {name}
-          </a>
-        ))
-      }
+      {Object.entries(SITE.social).map(([name, url]) => (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Visit our ${name} page`}
+          class="text-xs font-bold uppercase tracking-widest text-muted-foreground hover:text-primary transition-all no-underline"
+        >
+          {name}
+        </a>
+      ))}
     </div>
   </div>
 </footer>

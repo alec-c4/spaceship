@@ -19,9 +19,7 @@ if (seriesPosts.length <= 1) {
 ---
 
 <div class="rounded-lg border bg-card/50 px-6 py-5 mt-8 mb-12">
-  <div
-    class="flex items-center gap-2 mb-4 text-sm font-bold text-muted-foreground uppercase tracking-widest"
-  >
+  <div class="flex items-center gap-2 mb-4 text-sm font-bold text-muted-foreground uppercase tracking-widest">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="16"
@@ -39,31 +37,29 @@ if (seriesPosts.length <= 1) {
   </div>
 
   <ul class="space-y-3">
-    {
-      seriesPosts.map((post) => {
-        const isCurrent = post.id === currentPostId;
-        return (
-          <li>
-            {isCurrent ? (
-              <div class="flex items-start gap-3">
-                <span class="flex items-center justify-center w-6 h-6 mt-0.5 text-xs font-bold rounded-full bg-primary text-primary-foreground flex-shrink-0">
-                  {post.data.series?.order}
-                </span>
-                <span class="text-foreground font-medium">{post.data.title}</span>
-              </div>
-            ) : (
-              <a href={`/posts/${getPostSlug(post)}`} class="flex items-start gap-3 group">
-                <span class="flex items-center justify-center w-6 h-6 mt-0.5 text-xs font-bold rounded-full bg-muted text-muted-foreground ring-1 ring-border group-hover:ring-primary/50 group-hover:text-primary transition-all flex-shrink-0">
-                  {post.data.series?.order}
-                </span>
-                <span class="text-muted-foreground group-hover:text-primary transition-colors">
-                  {post.data.title}
-                </span>
-              </a>
-            )}
-          </li>
-        );
-      })
-    }
+    {seriesPosts.map((post) => {
+      const isCurrent = post.id === currentPostId;
+      return (
+        <li>
+          {isCurrent ? (
+            <div class="flex items-start gap-3">
+              <span class="flex items-center justify-center w-6 h-6 mt-0.5 text-xs font-bold rounded-full bg-primary text-primary-foreground flex-shrink-0">
+                {post.data.series?.order}
+              </span>
+              <span class="text-foreground font-medium">{post.data.title}</span>
+            </div>
+          ) : (
+            <a href={`/posts/${getPostSlug(post)}`} class="flex items-start gap-3 group">
+              <span class="flex items-center justify-center w-6 h-6 mt-0.5 text-xs font-bold rounded-full bg-muted text-muted-foreground ring-1 ring-border group-hover:ring-primary/50 group-hover:text-primary transition-all flex-shrink-0">
+                {post.data.series?.order}
+              </span>
+              <span class="text-muted-foreground group-hover:text-primary transition-colors">
+                {post.data.title}
+              </span>
+            </a>
+          )}
+        </li>
+      );
+    })}
   </ul>
 </div>

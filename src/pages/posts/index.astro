@@ -49,9 +49,7 @@ const sortedTags = Object.entries(tagCounts)
   <Breadcrumbs items={[{ name: 'Blog', href: '/posts' }]} />
 
   <div class="mb-10 sm:mb-12">
-    <h1
-      class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground leading-[1.1]"
-    >
+    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground leading-[1.1]">
       Writing
     </h1>
     <p class="mt-3 text-base sm:text-lg text-muted-foreground max-w-2xl leading-relaxed">
@@ -63,27 +61,21 @@ const sortedTags = Object.entries(tagCounts)
     <!-- Main Content: Posts -->
     <div class="flex-1 min-w-0">
       <div class="flex flex-col gap-12 lg:gap-14">
-        {
-          years.map((year) => (
-            <section class="flex flex-col gap-6">
-              <div class="flex items-center gap-6">
-                <h2 class="text-xs font-black uppercase tracking-[0.25em] text-muted-foreground opacity-80 shrink-0">
-                  {year}
-                </h2>
-                <div class="h-px flex-1 bg-border opacity-60" />
-              </div>
-              <div class="flex flex-col gap-3 sm:gap-4">
-                {groupedPosts[year].map((post) => (
-                  <PostCard
-                    {post}
-                    slug={getPostSlug(post)}
-                    readTime={getReadTime(post.body || '')}
-                  />
-                ))}
-              </div>
-            </section>
-          ))
-        }
+        {years.map((year) => (
+          <section class="flex flex-col gap-6">
+            <div class="flex items-center gap-6">
+              <h2 class="text-xs font-black uppercase tracking-[0.25em] text-muted-foreground opacity-80 shrink-0">
+                {year}
+              </h2>
+              <div class="h-px flex-1 bg-border opacity-60" />
+            </div>
+            <div class="flex flex-col gap-3 sm:gap-4">
+              {groupedPosts[year].map((post) => (
+                <PostCard {post} slug={getPostSlug(post)} readTime={getReadTime(post.body || '')} />
+              ))}
+            </div>
+          </section>
+        ))}
       </div>
     </div>
 
@@ -96,19 +88,17 @@ const sortedTags = Object.entries(tagCounts)
             Popular Topics
           </h3>
           <div class="flex flex-wrap gap-2">
-            {
-              sortedTags.map(([tag, count]) => (
-                <a
-                  href={`/posts/tag/${tag}`}
-                  class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium bg-background border border-border hover:bg-accent hover:border-primary/50 transition-all no-underline group"
-                >
-                  <span class="text-foreground group-hover:text-primary transition-colors">
-                    {tag}
-                  </span>
-                  <span class="text-muted-foreground text-xs">({count})</span>
-                </a>
-              ))
-            }
+            {sortedTags.map(([tag, count]) => (
+              <a
+                href={`/posts/tag/${tag}`}
+                class="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium bg-background border border-border hover:bg-accent hover:border-primary/50 transition-all no-underline group"
+              >
+                <span class="text-foreground group-hover:text-primary transition-colors">
+                  {tag}
+                </span>
+                <span class="text-muted-foreground text-xs">({count})</span>
+              </a>
+            ))}
           </div>
         </div>
       </div>
