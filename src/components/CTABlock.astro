@@ -31,13 +31,11 @@ if (enabled) {
 }
 ---
 
-{
-  enabled && ctaHTML && (
-    <aside class="my-8 p-4 sm:p-5 rounded-xl bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 border border-primary/20 backdrop-blur-sm">
-      <div class="cta-content prose prose-sm max-w-none dark:prose-invert" set:html={ctaHTML} />
-    </aside>
-  )
-}
+{enabled && ctaHTML && (
+  <aside class="my-8 p-4 sm:p-5 rounded-xl bg-gradient-to-br from-primary/5 via-primary/10 to-primary/5 border border-primary/20 backdrop-blur-sm">
+    <div class="cta-content prose prose-sm max-w-none dark:prose-invert" set:html={ctaHTML} />
+  </aside>
+)}
 
 <style>
   .cta-content :global(h1) {

@@ -25,9 +25,7 @@ const sortedYears = Object.keys(appearancesByYear).sort((a, b) => Number(b) - Nu
   <Breadcrumbs items={[{ name: 'Appearances', href: '/appearances' }]} />
 
   <div class="mb-12 sm:mb-16 lg:mb-24">
-    <h1
-      class="text-3xl sm:text-4xl lg:text-5xl 3xl:text-6xl font-black tracking-tight text-foreground leading-[1.1]"
-    >
+    <h1 class="text-3xl sm:text-4xl lg:text-5xl 3xl:text-6xl font-black tracking-tight text-foreground leading-[1.1]">
       Speaking & Writing
     </h1>
     <p class="mt-4 text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl leading-relaxed">
@@ -36,129 +34,127 @@ const sortedYears = Object.keys(appearancesByYear).sort((a, b) => Number(b) - Nu
   </div>
 
   <div class="space-y-16">
-    {
-      sortedYears.map((year) => (
-        <section class="relative pl-8 sm:pl-0">
-          <h2 class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-8 sticky top-20 bg-background/95 backdrop-blur py-2 w-max rounded-r-lg lg:static lg:bg-transparent lg:mb-6">
-            {year}
-          </h2>
-          <div class="border-l border-border/50 space-y-8 pl-8 sm:pl-12 relative">
-            <div class="absolute top-0 bottom-0 left-0 w-px bg-gradient-to-b from-transparent via-border to-transparent hidden sm:block" />
-            {appearancesByYear[year]
-              .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-              .map((item) => {
-                const mediaType = item.data.media || 'text';
-                const icon =
-                  mediaType === 'video'
-                    ? '<path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>'
-                    : mediaType === 'audio'
-                      ? '<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="23"/><line x1="8" x2="16" y1="23" y2="23"/>'
-                      : '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/>';
+    {sortedYears.map((year) => (
+      <section class="relative pl-8 sm:pl-0">
+        <h2 class="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-8 sticky top-20 bg-background/95 backdrop-blur py-2 w-max rounded-r-lg lg:static lg:bg-transparent lg:mb-6">
+          {year}
+        </h2>
+        <div class="border-l border-border/50 space-y-8 pl-8 sm:pl-12 relative">
+          <div class="absolute top-0 bottom-0 left-0 w-px bg-gradient-to-b from-transparent via-border to-transparent hidden sm:block" />
+          {appearancesByYear[year]
+            .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+            .map((item) => {
+              const mediaType = item.data.media || 'text';
+              const icon =
+                mediaType === 'video'
+                  ? '<path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>'
+                  : mediaType === 'audio'
+                    ? '<path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="23"/><line x1="8" x2="16" y1="23" y2="23"/>'
+                    : '<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><polyline points="10 9 9 9 8 9"/>';
 
-                return (
-                  <article class="group relative flex flex-col sm:flex-row gap-4 sm:gap-8 items-start">
-                    <div class="absolute -left-[41px] sm:-left-[57px] top-1.5 h-5 w-5 rounded-full border-2 border-border bg-background flex items-center justify-center group-hover:border-primary group-hover:scale-110 transition-all duration-300">
-                      <div class="h-1.5 w-1.5 rounded-full bg-muted-foreground group-hover:bg-primary transition-colors" />
+              return (
+                <article class="group relative flex flex-col sm:flex-row gap-4 sm:gap-8 items-start">
+                  <div class="absolute -left-[41px] sm:-left-[57px] top-1.5 h-5 w-5 rounded-full border-2 border-border bg-background flex items-center justify-center group-hover:border-primary group-hover:scale-110 transition-all duration-300">
+                    <div class="h-1.5 w-1.5 rounded-full bg-muted-foreground group-hover:bg-primary transition-colors" />
+                  </div>
+
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-3 text-xs mb-2">
+                      <span class="inline-flex items-center gap-1.5 font-bold uppercase tracking-widest text-primary">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          class="w-3.5 h-3.5"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          set:html={icon}
+                        />
+                        {mediaType}
+                      </span>
+                      <span class="text-muted-foreground/40">•</span>
+                      <span class="text-muted-foreground font-medium">
+                        {formatDate(item.data.date)}
+                      </span>
+                      {item.data.duration && (
+                        <>
+                          <span class="text-muted-foreground/40">•</span>
+                          <span class="text-muted-foreground font-medium">
+                            {item.data.duration}
+                          </span>
+                        </>
+                      )}
+                      {item.data.lang && item.data.lang !== 'en' && (
+                        <>
+                          <span class="text-muted-foreground/40">•</span>
+                          <span
+                            class="inline-flex items-center gap-1 hover:text-foreground transition-colors cursor-help"
+                            title={`Language: ${item.data.lang}`}
+                          >
+                            <span class="text-base leading-none group-hover:scale-110 transition-all">
+                              {getLangFlag(item.data.lang)}
+                            </span>
+                            <span class="text-[10px] font-bold uppercase tracking-tighter opacity-70">
+                              {item.data.lang}
+                            </span>
+                          </span>
+                        </>
+                      )}
                     </div>
 
-                    <div class="flex-1 min-w-0">
-                      <div class="flex items-center gap-3 text-xs mb-2">
-                        <span class="inline-flex items-center gap-1.5 font-bold uppercase tracking-widest text-primary">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="w-3.5 h-3.5"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            set:html={icon}
-                          />
-                          {mediaType}
-                        </span>
-                        <span class="text-muted-foreground/40">•</span>
-                        <span class="text-muted-foreground font-medium">
-                          {formatDate(item.data.date)}
-                        </span>
-                        {item.data.duration && (
-                          <>
-                            <span class="text-muted-foreground/40">•</span>
-                            <span class="text-muted-foreground font-medium">
-                              {item.data.duration}
-                            </span>
-                          </>
-                        )}
-                        {item.data.lang && item.data.lang !== 'en' && (
-                          <>
-                            <span class="text-muted-foreground/40">•</span>
-                            <span
-                              class="inline-flex items-center gap-1 hover:text-foreground transition-colors cursor-help"
-                              title={`Language: ${item.data.lang}`}
-                            >
-                              <span class="text-base leading-none group-hover:scale-110 transition-all">
-                                {getLangFlag(item.data.lang)}
-                              </span>
-                              <span class="text-[10px] font-bold uppercase tracking-tighter opacity-70">
-                                {item.data.lang}
-                              </span>
-                            </span>
-                          </>
-                        )}
-                      </div>
-
-                      <h3 class="text-lg sm:text-xl font-bold leading-tight mb-2 group-hover:text-primary transition-colors">
-                        <a
-                          href={item.data.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="no-underline"
-                        >
-                          {item.data.title}
-                        </a>
-                      </h3>
-
-                      <p class="text-base text-muted-foreground leading-relaxed line-clamp-2 mb-3">
-                        {item.data.description}
-                      </p>
-
-                      <div class="flex items-center gap-3 text-xs font-medium text-muted-foreground">
-                        <span class="bg-secondary/50 px-2 py-1 rounded-md text-foreground">
-                          {item.data.event}
-                        </span>
-                      </div>
-                    </div>
-
-                    <a
-                      href={item.data.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="hidden sm:flex flex-shrink-0 h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary hover:bg-secondary/50 transition-all"
-                      aria-label="View"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="lucide lucide-external-link"
+                    <h3 class="text-lg sm:text-xl font-bold leading-tight mb-2 group-hover:text-primary transition-colors">
+                      <a
+                        href={item.data.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="no-underline"
                       >
-                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                        <polyline points="15 3 21 3 21 9" />
-                        <line x1="10" x2="21" y1="14" y2="3" />
-                      </svg>
-                    </a>
-                  </article>
-                );
-              })}
-          </div>
-        </section>
-      ))
-    }
+                        {item.data.title}
+                      </a>
+                    </h3>
+
+                    <p class="text-base text-muted-foreground leading-relaxed line-clamp-2 mb-3">
+                      {item.data.description}
+                    </p>
+
+                    <div class="flex items-center gap-3 text-xs font-medium text-muted-foreground">
+                      <span class="bg-secondary/50 px-2 py-1 rounded-md text-foreground">
+                        {item.data.event}
+                      </span>
+                    </div>
+                  </div>
+
+                  <a
+                    href={item.data.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="hidden sm:flex flex-shrink-0 h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground hover:text-primary hover:border-primary hover:bg-secondary/50 transition-all"
+                    aria-label="View"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-external-link"
+                    >
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                      <polyline points="15 3 21 3 21 9" />
+                      <line x1="10" x2="21" y1="14" y2="3" />
+                    </svg>
+                  </a>
+                </article>
+              );
+            })}
+        </div>
+      </section>
+    ))}
   </div>
 </Layout>

@@ -67,60 +67,56 @@ const aboutTitle =
           Connect
         </h2>
         <div class="space-y-1">
-          {
-            Object.entries(SITE.social).map(([name, url]) => (
-              <a
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-accent transition-all group no-underline"
-              >
-                <div class="h-8 w-8 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground group-hover:bg-primary group-hover:text-primary-foreground transition-all flex-shrink-0">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="15"
-                    height="15"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    set:html={getSocialIcon(name)}
-                  />
-                </div>
-                <div class="flex-1 min-w-0">
-                  <div class="font-medium text-sm text-foreground capitalize leading-tight">
-                    {name}
-                  </div>
-                </div>
+          {Object.entries(SITE.social).map(([name, url]) => (
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center gap-2.5 px-2.5 py-2 rounded-lg hover:bg-accent transition-all group no-underline"
+            >
+              <div class="h-8 w-8 rounded-lg bg-secondary flex items-center justify-center text-muted-foreground group-hover:bg-primary group-hover:text-primary-foreground transition-all flex-shrink-0">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="13"
-                  height="13"
+                  width="15"
+                  height="15"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  class="text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0"
-                >
-                  <path d="M7 7h10v10" />
-                  <path d="M7 17 17 7" />
-                </svg>
-              </a>
-            ))
-          }
+                  set:html={getSocialIcon(name)}
+                />
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="font-medium text-sm text-foreground capitalize leading-tight">
+                  {name}
+                </div>
+              </div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="text-muted-foreground group-hover:text-primary transition-colors flex-shrink-0"
+              >
+                <path d="M7 7h10v10" />
+                <path d="M7 17 17 7" />
+              </svg>
+            </a>
+          ))}
         </div>
       </div>
     </aside>
 
     <!-- Right Content: Bio -->
     <div class="flex-1 min-w-0">
-      <h1
-        class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground leading-[1.1] mb-6"
-      >
+      <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-foreground leading-[1.1] mb-6">
         {aboutTitle}
       </h1>
       <article class="prose max-w-none text-muted-foreground">
