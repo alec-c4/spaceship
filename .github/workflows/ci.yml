@@ -37,3 +37,15 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+  ci:
+    name: CI
+    if: always()
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require the existing CI jobs to succeed
+        env:
+          JOB_0_RESULT: ${{ needs.build.result }}
+        run: |
+          test "$JOB_0_RESULT" = success
