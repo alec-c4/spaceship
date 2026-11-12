@@ -41,7 +41,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.11",
     "@astrojs/mdx": "^8.1.0",
-    "@astrojs/svelte": "^9.1.0",
+    "@astrojs/svelte": "^9.1.2",
     "@eslint/js": "^10.0.1",
     "@evilmartians/lefthook": "^2.2.2",
     "@rollup/rollup-darwin-arm64": "^4.64.12",
